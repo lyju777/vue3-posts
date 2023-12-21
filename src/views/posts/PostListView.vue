@@ -45,11 +45,10 @@
 <script setup>
 import PostItem from '@/components/posts/PostItem.vue';
 import PostDetailView from '@/views/posts/PostDetailView.vue';
-import AppPageination from '@/components/AppPageination.vue';
+
 import postFilter from '@/components/posts/postFilter.vue';
 import postModal from '@/components/posts/postModal.vue';
-import AppGrid from '@/components/AppGrid.vue';
-import AppCard from '@/components/AppCard.vue';
+
 import { getPosts } from '@/api/posts';
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
