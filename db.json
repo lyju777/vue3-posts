@@ -157,8 +157,8 @@
       "id": 35
     },
     {
-      "title": "123",
-      "content": "13213",
+      "title": "테슷스",
+      "content": "테스ㅠ스",
       "createdAt": 1703575590271,
       "id": 36
     },
@@ -197,6 +197,12 @@
       "content": "3213213",
       "createdAt": 1704692501951,
       "id": 42
+    },
+    {
+      "title": null,
+      "content": null,
+      "createdAt": 1704698758451,
+      "id": 45
     }
   ]
 }

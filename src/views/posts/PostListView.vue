@@ -54,15 +54,10 @@ import PostDetailView from '@/views/posts/PostDetailView.vue';
 import postFilter from '@/components/posts/postFilter.vue';
 import postModal from '@/components/posts/postModal.vue';
 
-import { getPosts } from '@/api/posts';
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { watchEffect } from 'vue';
+import { useAxios } from '@/hooks/useAxios';
 const router = useRouter();
-const posts = ref([]);
-
-const error = ref(null);
-const loading = ref(false);
 
 const params = ref({
 	_sort: 'createdAt',
@@ -71,26 +66,34 @@ const params = ref({
 	_page: 1,
 	title_like: '',
 });
+
+const {
+	response,
+	data: posts,
+	error,
+	loading,
+} = useAxios('/posts', { params });
+
 // 페이징
-const totalCount = ref(0);
+const totalCount = computed(() => response.value.headers['x-total-count']);
 const pageCount = computed(() =>
 	Math.ceil(totalCount.value / params.value._limit),
 );
 
-const fetchPosts = async () => {
-	try {
-		loading.value = true;
-		const { data, headers } = await getPosts(params.value);
-		posts.value = data;
-		totalCount.value = headers['x-total-count'];
-	} catch (err) {
-		error.value = err;
-	} finally {
-		loading.value = false;
-	}
-};
+// const fetchPosts = async () => {
+// 	try {
+// 		loading.value = true;
+// 		const { data, headers } = await getPosts(params.value);
+// 		posts.value = data;
+// 		totalCount.value = headers['x-total-count'];
+// 	} catch (err) {
+// 		error.value = err;
+// 	} finally {
+// 		loading.value = false;
+// 	}
+// };
+// watchEffect(fetchPosts);
 // fetchPosts();
-watchEffect(fetchPosts);
 
 const goPage = id => {
 	// router.push(`/posts/${id}`);
