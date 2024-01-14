@@ -8,11 +8,13 @@
 		<AppGrid :items="items" v-slot="{ item }">
 			<AppCard>{{ item }}</AppCard>
 		</AppGrid>
+		<h2>{{ position }}</h2>
+		<h3>x:{{ x }} y:{{ y }}</h3>
 	</div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { reactive, ref, toRef } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -21,6 +23,14 @@ const goAboutPage = () => {
 };
 
 const items = ref(['사과', '딸기', '포도', '바나나']);
+
+const position = reactive({
+	x: 100,
+	y: 1000,
+});
+
+const x = toRef(position, 'x');
+const y = toRef(position, 'y');
 </script>
 
 <style lang="scss" scoped></style>
